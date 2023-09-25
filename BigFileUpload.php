@@ -1,4 +1,7 @@
 <?php
+/**
+ * This is a cod example for uloading big file , using Laravel Bus and Job
+ */
 namespace App\Http\Controllers;
 
 use App\Jobs\CsvProcess;
@@ -7,11 +10,23 @@ use Illuminate\Support\Facades\Bus;
 
 class BigFileUploadContorller extends Controller
 {
+    /**
+     * A description of the entire PHP function.
+     *
+     * @return Some_Return_Value
+     */
     function index()
     {
         return view('upload-file');
     }
 
+    /**
+     * Uploads a file and processes its contents.
+     *
+     * @param Request $request The request object containing the uploaded file.
+     * @throws Some_Exception_Class Exception thrown if the file cannot be uploaded.
+     * @return mixed The result of the batch process.
+     */
     function upload(Request $request)
     {
         if ($request->has('mycsv')) {
@@ -30,7 +45,7 @@ class BigFileUploadContorller extends Controller
                     unset($data[0]);
                 }
 
-                $batch->add(new SalesCsvProcess($data, $header));
+                $batch->add(new CsvProcess($data, $header));
             }
 
             return $batch;
@@ -39,6 +54,13 @@ class BigFileUploadContorller extends Controller
         return "Please upload a file";
     }
 
+    /**
+     * Retrieves a batch using the given request.
+     *
+     * @param Request $request The request object containing the batch ID.
+     * @throws Some_Exception_Class Description of the exception that can be thrown.
+     * @return mixed The retrieved batch.
+     */
     public function batch(Request $request)
     {
         $batchId = $request->id;
