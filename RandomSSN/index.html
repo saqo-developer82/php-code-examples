@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random SSN, First Name, Last Name Generator</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 400px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    h1 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .field-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .field-row:first-of-type {
+      margin-top: 1rem;
+    }
+    .field-label {
+      flex-shrink: 0;
+      width: 5rem;
+      font-size: 0.8rem;
+      color: #555;
+    }
+    .field-value {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      min-height: 1.5rem;
+    }
+    .copy-btn {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+      color: #555;
+    }
+    .copy-btn:hover {
+      background: #f0f0f0;
+      color: #333;
+    }
+    .copy-btn svg {
+      width: 1rem;
+      height: 1rem;
+    }
+    .hint {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>Random SSN, First Name, Last Name Generator</h1>
+  <section>
+    <button type="button" id="generateBtn">Generate random SSN, first and last name</button>
+    <div class="field-row">
+      <span class="field-label">First</span>
+      <div class="field-value" id="firstNameResult" aria-live="polite"></div>
+      <button type="button" class="copy-btn" id="copyFirstNameBtn" title="Copy first name" aria-label="Copy first name">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </button>
+    </div>
+    <div class="field-row">
+      <span class="field-label">Last</span>
+      <div class="field-value" id="lastNameResult" aria-live="polite"></div>
+      <button type="button" class="copy-btn" id="copyLastNameBtn" title="Copy last name" aria-label="Copy last name">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </button>
+    </div>
+    <div class="field-row">
+      <span class="field-label">SSN</span>
+      <div class="field-value" id="result" aria-live="polite"></div>
+      <button type="button" class="copy-btn" id="copySsnBtn" title="Copy SSN" aria-label="Copy SSN">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+  <p class="hint">For testing/development only. Do not use with real data.</p>
+
+  <script>
+    (function () {
+      function randomArea() {
+        var r = Math.floor(Math.random() * 898) + 1;
+        return r >= 666 ? r + 1 : r;
+      }
+
+      function randomGroup() {
+        return Math.floor(Math.random() * 99) + 1;
+      }
+
+      function randomSerial() {
+        return Math.floor(Math.random() * 9999) + 1;
+      }
+
+      function pad(n, len) {
+        return String(n).padStart(len, '0');
+      }
+
+      function generateSSN() {
+        var area = pad(randomArea(), 3);
+        var group = pad(randomGroup(), 2);
+        var serial = pad(randomSerial(), 4);
+        return area + '-' + group + '-' + serial;
+      }
+
+      var firstNames = [
+        'James', 'Mary', 'John', 'Patricia', 'Robert', 'Jennifer', 'Michael', 'Linda',
+        'William', 'Elizabeth', 'David', 'Barbara', 'Richard', 'Susan', 'Joseph', 'Jessica',
+        'Thomas', 'Sarah', 'Charles', 'Karen', 'Christopher', 'Lisa', 'Daniel', 'Nancy',
+        'Matthew', 'Betty', 'Anthony', 'Margaret', 'Mark', 'Sandra', 'Donald', 'Ashley'
+      ];
+      var lastNames = [
+        'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis',
+        'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson',
+        'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin', 'Lee', 'Perez', 'Thompson',
+        'White', 'Harris', 'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker'
+      ];
+
+      function pick(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      function generateFirstName() {
+        return pick(firstNames);
+      }
+      function generateLastName() {
+        return pick(lastNames);
+      }
+
+      function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text);
+        } else {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+      }
+
+      var btn = document.getElementById('generateBtn');
+      var result = document.getElementById('result');
+      var firstNameResult = document.getElementById('firstNameResult');
+      var lastNameResult = document.getElementById('lastNameResult');
+      var copySsnBtn = document.getElementById('copySsnBtn');
+      var copyFirstNameBtn = document.getElementById('copyFirstNameBtn');
+      var copyLastNameBtn = document.getElementById('copyLastNameBtn');
+
+      btn.addEventListener('click', function () {
+        result.textContent = generateSSN();
+        firstNameResult.textContent = generateFirstName();
+        lastNameResult.textContent = generateLastName();
+      });
+
+      copySsnBtn.addEventListener('click', function () {
+        var text = result.textContent;
+        if (text) copyToClipboard(text);
+      });
+      copyFirstNameBtn.addEventListener('click', function () {
+        var text = firstNameResult.textContent;
+        if (text) copyToClipboard(text);
+      });
+      copyLastNameBtn.addEventListener('click', function () {
+        var text = lastNameResult.textContent;
+        if (text) copyToClipboard(text);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+    "name": "excel-reader/mysql-importer",
+    "description": "PHP script to read XLSX files and insert data into MySQL database",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "phpoffice/phpspreadsheet": "^1.29",
+        "ext-pdo": "*",
+        "ext-mysqli": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ExcelReader\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Developer",
+            "email": "developer@example.com"
+        }
+    ],
+    "minimum-stability": "stable"
+} 
