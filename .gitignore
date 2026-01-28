@@ -1,5 +1,5 @@
 .idea
 fortest.php
 /FullNameGenerator/vendor
-/PostmanCollectionSorting/postman_sorted.json
-/PostmanCollectionSorting/postman_collection.json
+#/PostmanCollectionSorting/postman_sorted.json
+#/PostmanCollectionSorting/postman_collection.json
