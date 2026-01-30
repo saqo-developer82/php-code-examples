@@ -99,6 +99,16 @@
       </button>
     </div>
     <div class="field-row">
+      <span class="field-label">Email</span>
+      <div class="field-value" id="emailResult" aria-live="polite"></div>
+      <button type="button" class="copy-btn" id="copyEmailBtn" title="Copy email" aria-label="Copy email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </button>
+    </div>
+    <div class="field-row">
       <span class="field-label">SSN</span>
       <div class="field-value" id="result" aria-live="polite"></div>
       <button type="button" class="copy-btn" id="copySsnBtn" title="Copy SSN" aria-label="Copy SSN">
@@ -161,6 +171,11 @@
         return pick(lastNames);
       }
 
+      function generateEmail(firstName, lastName) {
+        var local = (firstName + '.' + lastName).toLowerCase().replace(/\s+/g, '');
+        return local + '@example.com';
+      }
+
       function copyToClipboard(text) {
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(text);
@@ -180,14 +195,19 @@
       var result = document.getElementById('result');
       var firstNameResult = document.getElementById('firstNameResult');
       var lastNameResult = document.getElementById('lastNameResult');
+      var emailResult = document.getElementById('emailResult');
       var copySsnBtn = document.getElementById('copySsnBtn');
       var copyFirstNameBtn = document.getElementById('copyFirstNameBtn');
       var copyLastNameBtn = document.getElementById('copyLastNameBtn');
+      var copyEmailBtn = document.getElementById('copyEmailBtn');
 
       btn.addEventListener('click', function () {
         result.textContent = generateSSN();
-        firstNameResult.textContent = generateFirstName();
-        lastNameResult.textContent = generateLastName();
+        var first = generateFirstName();
+        var last = generateLastName();
+        firstNameResult.textContent = first;
+        lastNameResult.textContent = last;
+        emailResult.textContent = generateEmail(first, last);
       });
 
       copySsnBtn.addEventListener('click', function () {
@@ -200,6 +220,10 @@
       });
       copyLastNameBtn.addEventListener('click', function () {
         var text = lastNameResult.textContent;
+        if (text) copyToClipboard(text);
+      });
+      copyEmailBtn.addEventListener('click', function () {
+        var text = emailResult.textContent;
         if (text) copyToClipboard(text);
       });
     })();
