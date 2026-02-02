@@ -58,6 +58,25 @@
     return part1 + '-' + part2;
   }
 
+  // Phone: E.164 format, valid patterns for intl-tel-input / libphonenumber
+  var phoneCountries = [
+    { dial: '1', gen: function () { return randRange(2, 9) + pad(rand(100), 2) + randRange(2, 9) + pad(rand(100), 2) + pad(rand(10000), 4); } },           // US/CA NANP: NPA 2-9xx, NXX 2-9xx, 4 digits
+    { dial: '44', gen: function () { return '7' + pad(rand(1000000000), 9); } },                                                                      // UK mobile: 7 + 9 digits
+    { dial: '49', gen: function () { var p = ['15', '16', '17'][rand(3)]; return p + pad(rand(100000000), 8); } },                                       // DE mobile: 15x/16x/17x + 8 digits
+    { dial: '33', gen: function () { return (rand(2) === 0 ? '6' : '7') + pad(rand(100000000), 8); } },                                                 // FR mobile: 6 or 7 + 8 digits
+    { dial: '34', gen: function () { return (rand(4) === 0 ? '6' : rand(4) === 1 ? '7' : rand(4) === 2 ? '8' : '9') + pad(rand(100000000), 8); } },     // ES: 6/7/8/9 + 8 digits
+    { dial: '39', gen: function () { return '3' + pad(rand(1000000000), 9); } },                                                                       // IT mobile: 3 + 9 digits
+    { dial: '61', gen: function () { return '4' + pad(rand(100000000), 8); } },                                                                       // AU mobile: 4 + 8 digits
+    { dial: '81', gen: function () { return (rand(2) === 0 ? '90' : '80') + pad(rand(10000000), 7); } },                                               // JP mobile: 090/080 + 7 digits
+    { dial: '86', gen: function () { return '1' + randRange(3, 9) + pad(rand(100000000), 8); } },                                                      // CN mobile: 13x-19x + 8 digits
+  ];
+  function rand(n) { return Math.floor(Math.random() * n); }
+  function randRange(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
+  function generatePhone() {
+    var country = phoneCountries[rand(phoneCountries.length)];
+    return '+' + country.dial + country.gen();
+  }
+
   function copyToClipboard(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text);
@@ -79,11 +98,13 @@
   var lastNameResult = document.getElementById('lastNameResult');
   var emailResult = document.getElementById('emailResult');
   var zipResult = document.getElementById('zipResult');
+  var phoneResult = document.getElementById('phoneResult');
   var copySsnBtn = document.getElementById('copySsnBtn');
   var copyFirstNameBtn = document.getElementById('copyFirstNameBtn');
   var copyLastNameBtn = document.getElementById('copyLastNameBtn');
   var copyEmailBtn = document.getElementById('copyEmailBtn');
   var copyZipBtn = document.getElementById('copyZipBtn');
+  var copyPhoneBtn = document.getElementById('copyPhoneBtn');
 
   btn.addEventListener('click', function () {
     result.textContent = generateSSN();
@@ -93,6 +114,7 @@
     lastNameResult.textContent = last;
     emailResult.textContent = generateEmail(first, last);
     zipResult.textContent = generateZipCode();
+    phoneResult.textContent = generatePhone();
   });
 
   copySsnBtn.addEventListener('click', function () {
@@ -113,6 +135,10 @@
   });
   copyZipBtn.addEventListener('click', function () {
     var text = zipResult.textContent;
+    if (text) copyToClipboard(text);
+  });
+  copyPhoneBtn.addEventListener('click', function () {
+    var text = phoneResult.textContent;
     if (text) copyToClipboard(text);
   });
 })();
