@@ -92,6 +92,10 @@
     }
   }
 
+  function generateCompanyName(first, last) {
+    return first + last + ' Inc.';
+  }
+
   var btn = document.getElementById('generateBtn');
   var result = document.getElementById('result');
   var firstNameResult = document.getElementById('firstNameResult');
@@ -99,12 +103,15 @@
   var emailResult = document.getElementById('emailResult');
   var zipResult = document.getElementById('zipResult');
   var phoneResult = document.getElementById('phoneResult');
+  var companyNameResult = document.getElementById('companyNameResult');
+
   var copySsnBtn = document.getElementById('copySsnBtn');
   var copyFirstNameBtn = document.getElementById('copyFirstNameBtn');
   var copyLastNameBtn = document.getElementById('copyLastNameBtn');
   var copyEmailBtn = document.getElementById('copyEmailBtn');
   var copyZipBtn = document.getElementById('copyZipBtn');
   var copyPhoneBtn = document.getElementById('copyPhoneBtn');
+  var copyCompanyNameBtn = document.getElementById('copyCompanyNameBtn');
 
   btn.addEventListener('click', function () {
     result.textContent = generateSSN();
@@ -115,6 +122,7 @@
     emailResult.textContent = generateEmail(first, last);
     zipResult.textContent = generateZipCode();
     phoneResult.textContent = generatePhone();
+    companyNameResult.textContent = generateCompanyName(first, last);
   });
 
   copySsnBtn.addEventListener('click', function () {
@@ -139,6 +147,10 @@
   });
   copyPhoneBtn.addEventListener('click', function () {
     var text = phoneResult.textContent;
+    if (text) copyToClipboard(text);
+  });
+  copyCompanyNameBtn.addEventListener('click', function () {
+    var text = companyNameResult.textContent;
     if (text) copyToClipboard(text);
   });
 })();

@@ -25,7 +25,8 @@ button {
 .field-label {
   flex-shrink: 0;
   width: 5rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
   color: #555;
 }
 .field-value {

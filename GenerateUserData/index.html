@@ -3,33 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random SSN, First Name, Last Name Generator</title>
+  <title>User Data Generator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Random SSN, First Name, Last Name Generator</h1>
+  <h1>User Data Generator</h1>
   <section>
-    <button type="button" id="generateBtn">Generate random SSN, first and last name</button>
-    <div class="field-row">
-      <span class="field-label">First</span>
-      <div class="field-value" id="firstNameResult" aria-live="polite"></div>
-      <button type="button" class="copy-btn" id="copyFirstNameBtn" title="Copy first name" aria-label="Copy first name">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="9" width="13" height="13" rx="2"/>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-        </svg>
-      </button>
-    </div>
-    <div class="field-row">
-      <span class="field-label">Last</span>
-      <div class="field-value" id="lastNameResult" aria-live="polite"></div>
-      <button type="button" class="copy-btn" id="copyLastNameBtn" title="Copy last name" aria-label="Copy last name">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="9" width="13" height="13" rx="2"/>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-        </svg>
-      </button>
-    </div>
+    <button type="button" id="generateBtn">Generate user data</button>
+
     <div class="field-row">
       <span class="field-label">Email</span>
       <div class="field-value" id="emailResult" aria-live="polite"></div>
@@ -40,6 +21,29 @@
         </svg>
       </button>
     </div>
+
+    <div class="field-row">
+      <span class="field-label">First</span>
+      <div class="field-value" id="firstNameResult" aria-live="polite"></div>
+      <button type="button" class="copy-btn" id="copyFirstNameBtn" title="Copy first name" aria-label="Copy first name">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="field-row">
+      <span class="field-label">Last</span>
+      <div class="field-value" id="lastNameResult" aria-live="polite"></div>
+      <button type="button" class="copy-btn" id="copyLastNameBtn" title="Copy last name" aria-label="Copy last name">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </button>
+    </div>
+
     <div class="field-row">
       <span class="field-label">SSN</span>
       <div class="field-value" id="result" aria-live="polite"></div>
@@ -50,6 +54,7 @@
         </svg>
       </button>
     </div>
+
     <div class="field-row">
       <span class="field-label">Zip</span>
       <div class="field-value" id="zipResult" aria-live="polite"></div>
@@ -60,10 +65,22 @@
         </svg>
       </button>
     </div>
+
     <div class="field-row">
       <span class="field-label">Phone</span>
       <div class="field-value" id="phoneResult" aria-live="polite"></div>
       <button type="button" class="copy-btn" id="copyPhoneBtn" title="Copy phone" aria-label="Copy phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="field-row">
+      <span class="field-label">Company Name</span>
+      <div class="field-value" id="companyNameResult" aria-live="polite"></div>
+      <button type="button" class="copy-btn" id="copyCompanyNameBtn" title="Copy company name" aria-label="Copy company name">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="9" y="9" width="13" height="13" rx="2"/>
           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
